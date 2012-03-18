@@ -1,10 +1,22 @@
 Amfora::Application.routes.draw do
+  resources :tests
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
 
   root :to => 'application#index'
   match '/' => 'application#index'
+  match 'posts/:id/:slug' => 'application#index'
+
+  scope '/api' do
+    resources :posts, :only => [:index, :show] do
+      resource :reply_to, :controller => "posts"
+      resources :replies, :controller => "posts"
+    end
+  end
+
+  # match '/posts/:id/replies' => 'posts#replies'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

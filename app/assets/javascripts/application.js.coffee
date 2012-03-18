@@ -1,9 +1,7 @@
-require ['jquery', 'backbone', 'forum/PostView', 'forum/EditorView'], ($, Backbone, PostView, EditorView) ->
-
-  # Start up the app once the DOM is ready
+require ['jquery', 'backbone', 'router', 'views/ApplicationView'], ($, Backbone, Router, ApplicationView) ->
   $ ->
-    view = new PostView({el: $('.content')[0]})
-    view.render()
-
-    editorView = new EditorView({el: $('.editor')[0]})
-    editorView.render()
+    @rootView = new ApplicationView(el: $('.rootViewContainer')[0])
+    @rootView.render()
+    @router = new Router({controller: @rootView})
+    x = Backbone.history.start({pushState: true, root: "/"})
+    42
