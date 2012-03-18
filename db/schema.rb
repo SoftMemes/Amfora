@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120318025430) do
+ActiveRecord::Schema.define(:version => 20120318031753) do
+
+  create_table "posts", :force => true do |t|
+    t.integer  "author_id"
+    t.integer  "reply_to_id"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
+  add_index "posts", ["reply_to_id"], :name => "index_posts_on_reply_to_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
