@@ -1,4 +1,10 @@
 Amfora::Application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  devise_for :users
+
+  root :to => 'application#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
